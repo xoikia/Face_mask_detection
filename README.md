@@ -28,11 +28,15 @@ the form of graphs, It will create two plots [confusion matrix](https://github.c
 
 ### **Steps**
 
-    * I have used the keras MobileNetV2 architecture in my model. This model is already pretrained and thus very effective in feature 
-      extraction. On top of this I have added Forward Connection layers consisting of Pooling, Dropout and Dense layers.The Dropout 
-      layer is added to avoid overfitting of the model. The final layer of the model is the dense layer with two neurons for classifi-
-      -cation of mask.
+    * I have used the keras MobileNetV2 architecture in my model. This model is already pretrained and thus very effective 
+      in feature extraction. On top of this I have added Forward Connection layers consisting of Pooling, Dropout and Dens-
+      -e layers.The Dropout layer is added to avoid overfitting of the model. The final layer of the model is the dense la-
+      -yer with two neurons for classification of mask.
       
-    * 
+    * After this I trained the model on the dataset and after completion saved the model which saves all the details nece-
+      -ssary to reconstitute the model.
+      
+    * After training is completed we will also get the Accuracy plot for training and validation data along with the accura-
+      -cy matrix plot.
     
     
