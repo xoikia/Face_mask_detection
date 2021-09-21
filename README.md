@@ -50,14 +50,16 @@ the form of graphs, It will create two plots [confusion matrix](https://github.c
       
    * After this we trained the model on the dataset and after completion saved the model which saves all the details necessary to reconstitute the model.
      ```
-     H = model.fit(data_aug.flow(trainX, trainY, batch_size=BATCHSIZE), steps_per_epoch=len(trainX)//BATCHSIZE,
-              validation_data=(testX, testY), epochs=EPOCHS)
+     H = model.fit(data_aug.flow(trainX, trainY, batch_size=BATCHSIZE), 
+     		steps_per_epoch=len(trainX)//BATCHSIZE,
+              	validation_data=(testX, testY), epochs=EPOCHS)
      model.save("mask_detector.model", save_format="h5")
      ```
       
    * After training is completed we will also get the Accuracy plot for training and validation data along with the accuracy matrix plot.
      ```
-     make_confusion_matrix(testY.argmax(axis=1), pred, group_names=['TN', 'FP', 'FN', 'TP'], categories=lb.classes_)
+     make_confusion_matrix(testY.argmax(axis=1), pred, group_names=['TN', 'FP', 'FN', 'TP'], 
+     				categories=lb.classes_)
      create_training_loss_accuracy(model=H, epochs=EPOCHS)
      ```
 
