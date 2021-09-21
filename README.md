@@ -1,4 +1,7 @@
 # **Face_Mask_detection**
+ <p align="center">
+   <img src="https://github.com/xoikia/Face_mask_detection/blob/main/logo.jpg" alt="LOGO">
+</p>
 
 Due to covid-19 pandemic it has become very important for everyone to wear face mask not just for protection of itself but also for others. This model detects whether an 
 individual is wearing a mask or not in real time, thus ensuring your safety and the safety of others .
@@ -33,10 +36,30 @@ the form of graphs, It will create two plots [confusion matrix](https://github.c
    * We have used the keras MobileNetV2 architecture in my model. This model is already pretrained and thus very effective in feature extraction. On top of this 
      We have added Forward Connection layers consisting of Pooling, Dropout and Dense layers.The Dropout layer is added to avoid overfitting of the model. The 
      final layer of the model is the dense layer with two neurons for classification of mask.
+     
+     ```
+     basemodel = MobileNetV2(weights="imagenet", include_top=False, input_tensor=Input(shape=(224, 224, 3)))
+     top = basemodel.output
+     top = AveragePooling2D(pool_size=(7, 7))(top)
+     top = Flatten(name="Flatten")(top)
+     top = Dense(128, activation="relu")(top)
+     top = Dropout(0.5)(top)
+     top = Dense(2, activation="softmax")(top)
+     ```
+     
       
    * After this we trained the model on the dataset and after completion saved the model which saves all the details necessary to reconstitute the model.
+     ```
+     H = model.fit(data_aug.flow(trainX, trainY, batch_size=BATCHSIZE), steps_per_epoch=len(trainX)//BATCHSIZE,
+              validation_data=(testX, testY), epochs=EPOCHS)
+     model.save("mask_detector.model", save_format="h5")
+     ```
       
    * After training is completed we will also get the Accuracy plot for training and validation data along with the accuracy matrix plot.
+     ```
+     make_confusion_matrix(testY.argmax(axis=1), pred, group_names=['TN', 'FP', 'FN', 'TP'], categories=lb.classes_)
+     create_training_loss_accuracy(model=H, epochs=EPOCHS)
+     ```
 
 ***Model Evaluations***
 
